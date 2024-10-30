@@ -1,0 +1,99 @@
+@startuml imdb_data
+entity Movie {
+    * id : uint
+    * movie_id : string
+    * title : string
+    * original_title : string
+    * full_title : string
+    * movie_type  : string
+    * release_year : integer
+    * image : string
+    * release_date : string
+    * runtime_mins : string
+    * introduction : string
+    * awards : string
+    * imdbRating : decimal(5, 2)
+    * imdbRatingVotes : integer
+}
+entity Genre {
+    * id : uint
+    * name : string
+}
+entity Season {
+    * id : integer
+    * movie_id : integer
+    * season_no : integer
+}
+entity Episodes {
+    * id : integer
+    * movie_id : integer
+    * publish_at : date
+    * title : string
+    * introduction : string
+    * rating : real
+}
+entity Rating {
+    * id : uint
+    * movie_id : uint
+    * imdb_id : string
+    * title : string
+    * full_title : string
+    * type : string
+    * year : integer
+    * imdb : decimal(5,2)
+    * metacritic : integer
+    * the_movie_db : decimal(5,2)
+    * rotten_tomatoes : integer
+    * tvcom : decimal(5,2)
+    * film_affinity : decimal(5,2)
+}
+entity BoxOffice {
+    * id : uint
+    * movie_id : uint
+    * budget : string
+    * opening_weekend_usa : string
+    * gross_usa : string
+    * cumulative_worldwide_gross : string
+}
+entity MovieStarRelation {
+    * movie_id : integer
+    * star_id : integer
+}
+entity Star {
+    * id : uint
+    * star_id : string
+    * image : string
+    * name : string
+    * as_character : string
+}
+entity MovieCompanyRelation {
+    * movie_id : integer
+    * company_id : integer
+}
+entity Company {
+    * id : uint
+    * company_id : string
+    * name : string
+}
+entity MovieCountryRelation {
+    * movie_id : integer
+    * country_id : integer
+}
+entity Country {
+    * id : uint
+    * name : string
+}
+Movie ||--o{ Genre
+Movie ||--|| Rating
+Movie ||--|| BoxOffice
+Movie ||--|{ Season
+Season ||--|{ Episodes
+Movie ||--|{ MovieCasterRelation
+MovieCasterRelation }|--|{ Caster
+Movie ||--|{ MovieCompanyRelation
+MovieCompanyRelation }|--|{ Company
+Movie ||--|{ MovieCountryRelation
+MovieCountryRelation }|--|{ Country
+Movie ||--|{ MovieStarRelation
+MovieStarRelation }|--|{ Star
+@enduml
